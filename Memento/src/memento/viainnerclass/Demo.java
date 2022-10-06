@@ -1,4 +1,4 @@
-package memento;
+package memento.viainnerclass;
 
 
 public class Demo {
@@ -10,25 +10,19 @@ public class Demo {
     player.printSheet();
     
     CareTaker caretaker= new CareTaker();
-    Memento mem = new Memento();
     
     temp=Stats.generate();
     temp.printStats();
-    mem.setState(temp);
-    caretaker.add(mem.saveStateToMemento());
+    caretaker.add(temp.save());
     
     temp=Stats.generate();
     temp.printStats();
+    caretaker.add(temp.save());
     
-    mem.setState(temp);
-    caretaker.add(mem.saveStateToMemento());
-    
-    mem.getStateFromMemento(caretaker.get(0).getState());
-    temp=mem.getState();
+    temp.undoToLastSave(caretaker.get(0));
     temp.printStats();
     
-    mem.getStateFromMemento( caretaker.get(1).getState());
-    temp=mem.getState();
+    temp.undoToLastSave(caretaker.get(1));
     temp.printStats();
     
 }
