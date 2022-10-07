@@ -1,18 +1,18 @@
-package memento;
+package DnD.CharacterCreator.MementoCareTaker;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class CareTaker {
-   private List<Memento> mementoList = new ArrayList<Memento>();
+   private List<Object> mementoList = new ArrayList<Object>();
    static int saveID=0;
-   public void add(Memento memento){
-      mementoList.add(memento);
+   public void add(Object obj){
+      mementoList.add(obj);
       System.out.println("State save "+saveID+"\n");
       saveID++;
    }
 
-   public Memento get(int index){
+   public Object get(int index){
       System.out.println("Loading stats from save "+index);
       return mementoList.get(index);
    }

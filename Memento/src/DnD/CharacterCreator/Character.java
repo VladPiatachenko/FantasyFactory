@@ -1,4 +1,4 @@
-package memento.viainnerclass;
+package DnD.CharacterCreator;
 
 public class Character {
     private String name;
