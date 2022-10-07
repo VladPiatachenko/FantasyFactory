@@ -14,9 +14,7 @@ public class Stats {
         this.attrib.put("Constitution", c);
         this.attrib.put("Intelligence", i);
         this.attrib.put("Wisdom", w);
-        this.attrib.put("Charisma", ch);
-        
-        
+        this.attrib.put("Charisma", ch);        
     }
 
     public Map<String, Integer> getAttrib() {
@@ -33,7 +31,8 @@ public static Stats generate(){
     public void printStats(){
     System.out.println("~~~~~Attributes Sheet~~~~\nStrength:"+this.attrib.get("Strength")+
             "\nDexterity:"+this.attrib.get("Dexterity")+"\nConstitution:"+this.attrib.get("Constitution")+
-            "\nIntelligence:"+this.attrib.get("Intelligence")+"\nWisdom:"+this.attrib.get("Wisdom")+"\nCharisma:"+this.attrib.get("Charisma"));
+            "\nIntelligence:"+this.attrib.get("Intelligence")+"\nWisdom:"+this.attrib.get("Wisdom")+
+            "\nCharisma:"+this.attrib.get("Charisma")+"\n");
     } 
     
     public Memento save(){
