@@ -1,13 +1,29 @@
 package DnD.CharacterCreator;
 
+import DnD.CharacterCreator.DnDClass.Classes.CharacterClass;
 import DnD.CharacterCreator.DnDRace.CharacterRace;
+import DnD.DataVisitor.DataElement;
+import DnD.DataVisitor.DataElementsVisitor;
 import java.util.Set;
+import java.util.TreeMap;
+import org.json.simple.JSONObject;
 
-public class Character {
+public class Character implements DataElement{
     private String name;
-    private String dndclass;
+    private CharacterClass dndclass;
     private CharacterRace race;
     private Stats chStats;
+    private int health;
+
+    public Character(String name, CharacterClass dndclass, CharacterRace race) {
+        this.name = name;
+        this.dndclass = dndclass;
+        this.health=dndclass.getDice();
+        this.race = race;
+    }
+    public int getHealth() {
+        return health;
+    }
 
     public CharacterRace getRace() {
         return race;
@@ -17,11 +33,14 @@ public class Character {
         this.race = race;
     }
 
-    public Character(String name, String dndclass, CharacterRace race) {
-        this.name = name;
-        this.dndclass = dndclass;
-        this.race = race;
+    public CharacterClass getDndclass() {
+        return dndclass;
     }
+
+    public Stats getChStats() {
+        return chStats;
+    }
+
 
     public String getName() {
         return name;
@@ -30,37 +49,36 @@ public class Character {
     public void setName(String name) {
         this.name = name;
     }
-
-    public String getDndclass() {
-        return dndclass;
-    }
-
-    public void setDndclass(String dndclass) {
-        this.dndclass = dndclass;
-    }
-
+    
     public Stats getAtributes() {
         return chStats;
     }
     public void addRaceBonuses() {
-        System.out.println("Recalculating attributes for "+this.race.toString());
         Set<String> key=this.chStats.getAttrib().keySet();
         for(String title:key){
             int val=this.chStats.getAttrib().get(title)+this.race.getRaceBonuses().getAttrib().get(title);
             this.chStats.getAttrib().put(title, val);
         }
+        this.health+=Math.floor(this.chStats.getAttrib().get("Constitution")/2)-5;
     }
     
     public void setAtributes(Stats attributes) {
         this.chStats = attributes;
     }
     public void printSheet(){
-        System.out.println("Name: "+name+"\nClass: "+dndclass);
+        System.out.println("Name: "+name+"\n"+dndclass.toString()+"\nHealth points:"+health);
+        dndclass.printMagica();
         race.print();
         chStats.printStats();
     }
     
     public void battleCry(){
         race.shout();
+    }
+
+    
+    @Override
+    public TreeMap access(DataElementsVisitor vis) {
+        return vis.visit(this);
     }
 }

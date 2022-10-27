@@ -1,19 +1,23 @@
 package DnD.CharacterCreator.DnDRace;
 
 import DnD.CharacterCreator.Stats;
+import DnD.DataVisitor.DataElement;
+import DnD.DataVisitor.DataElementsVisitor;
 import java.util.List;
 import java.util.Set;
+import java.util.TreeMap;
+import org.json.simple.JSONObject;
 
-public abstract class CharacterRace {
+public abstract class CharacterRace implements DataElement{
     protected String name;
     protected Stats bonuses;
-    protected int maxage;
     
     public Stats getRaceBonuses(){
         return bonuses;
     }
     
     public abstract void shout();
+    
     public String toString(){
     return name;
     }
@@ -25,5 +29,10 @@ public abstract class CharacterRace {
             System.out.println("Race bonus: "+title+" +"+bonuses.getAttrib().get(title));
         }
         }
+    }
+
+    @Override
+    public TreeMap access(DataElementsVisitor vis) {
+        return vis.visit(this);
     }
 }

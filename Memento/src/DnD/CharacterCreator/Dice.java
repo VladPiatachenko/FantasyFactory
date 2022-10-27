@@ -5,14 +5,14 @@ import java.util.Collections;
 
 public class Dice {
     
-public static int roll(){
-    return 1+(int)(Math.random()*((6-1)+1));
+public static int roll(int dice){
+    return 1+(int)(Math.random()*((dice-1)+1));
     }    
 public static int rollstat(){
   ArrayList<Integer> list = new ArrayList<Integer>();
 
         for (int i = 0; i < 6; i++) {
-            list.add(roll());
+            list.add(roll(6));
         }
 
         Collections.sort(list, Collections.reverseOrder());

@@ -16,4 +16,11 @@ public class CareTaker {
       System.out.println("Loading stats from save "+index);
       return mementoList.get(index);
    }
+   public Object getLast(){
+     return mementoList.get(mementoList.size()-1);
+   }
+   public boolean isEmptyList(){
+    if(mementoList.isEmpty()){return true;}
+    return false;
+   }
 }
